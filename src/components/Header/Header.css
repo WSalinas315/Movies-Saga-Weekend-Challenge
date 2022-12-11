@@ -1,0 +1,9 @@
+.page-header{
+  font-weight: bolder;
+  font-size: larger;
+  color: silver;
+}
+
+body{
+  background-color: rgb(2, 41, 75);
+}

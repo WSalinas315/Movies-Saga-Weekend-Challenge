@@ -1,4 +1,20 @@
 .movies {
     display : flex;
     flex-wrap: wrap;
+    gap: 15px;
+}
+
+main{
+    background-color: rgb(2, 41, 75);
+    margin: 15px;
+    color: silver;
+}
+
+
+.movie-card{
+    background-color: silver;
+    padding: 20px;
+    border-radius: 12px;
+    color: black;
+    width: 225px;
 }

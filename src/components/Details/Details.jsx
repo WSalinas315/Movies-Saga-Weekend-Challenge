@@ -1,5 +1,7 @@
 import { useSelector } from 'react-redux';
-
+import { useHistory } from "react-router-dom";
+import { Button } from "@material-ui/core";
+import { useDispatch } from "react-redux";
 
 export default function Details() {
 
@@ -7,6 +9,18 @@ export default function Details() {
   // const movies = useSelector(store => store.movies);
   const movie = useSelector(store => store.selectedMovie);
   const genres = useSelector(store => store.genres);
+
+  // initialize history
+  const history = useHistory();
+
+  // initialize dispatch
+  const dispatch = useDispatch();
+
+  // function to return to user to the home page
+  const goHome = () =>{
+    dispatch({type: 'SET_DETAIL_HOME'});
+    history.push('/');
+  }
 
   // mapping over the genres for a particular movie and returning the genre name
   const genreList = genres.data.map(genre => {
@@ -17,6 +31,7 @@ export default function Details() {
 
   return (
     <div className='movie-details'>
+      <Button variant='contained' onClick={() => goHome()}>Back To List</Button>
       <img src={movie.poster} />
       <h1>{movie.title}</h1>
       <h3>Genres:</h3>
