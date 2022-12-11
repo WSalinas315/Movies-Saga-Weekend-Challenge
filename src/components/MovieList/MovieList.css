@@ -28,12 +28,12 @@ img{
     width: 185px;
     max-height: 274px;
     min-height: 274px;
+    cursor: pointer;
 }
 
 .movie-title{
-    /* position:relative;
-    bottom: 10px; */
     height: 30px;
+    font-weight: bold;
 }
 
 .add-btn{

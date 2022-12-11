@@ -18,7 +18,7 @@ function MovieList() {
     // get detail URL from the store
     const url = useSelector(store => store.detailURL);
 
-    // fetches the movie list
+    // fetches the movie list and genres
     useEffect(() => {
         dispatch({ type: 'FETCH_MOVIES' });
         dispatch({ type: 'FETCH_ALL_GENRES' });

@@ -1,15 +1,19 @@
 import { useHistory } from "react-router-dom";
-// import { Button, FormControl, InputLabel, MenuItem, TextField, Select } from "@material-ui/core";
 import { Button, TextField } from "@material-ui/core";
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import { useDispatch, useSelector } from "react-redux";
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './AddMovie.css';
 
 export default function AddMovie() {
+
+  // fetches the genre list
+  useEffect(() => {
+    dispatch({ type: 'FETCH_ALL_GENRES' });
+  }, []);
 
   // initialize dispatch
   const dispatch = useDispatch();
@@ -20,7 +24,7 @@ export default function AddMovie() {
   // get allGenres from the store
   const allGenres = useSelector(store => store.allGenres);
 
-  // local state
+  // local states
   const [movieTitle, setMovieTitle] = useState('');
   const [moviePoster, setMoviePoster] = useState('');
   const [description, setDescription] = useState('');
@@ -37,18 +41,19 @@ export default function AddMovie() {
     setGenreID(event.target.value);
   }
 
-  //
+  // submit movie function that calls a dispatch for posting a new movie to the database and returns to the movie list
   const submitMovie = (event) => {
     console.log('OBJECT to send for ADD_MOVIE:', movieTitle, moviePoster, description, genreID);
     event.preventDefault();
-    dispatch({type: 'ADD_MOVIE', 
-              payload: {
-                title: movieTitle,
-                poster: moviePoster,
-                description: description,
-                genre_id: genreID
-    }});
-    // dispatch({ type: 'FETCH_MOVIES' });
+    dispatch({
+      type: 'ADD_MOVIE',
+      payload: {
+        title: movieTitle,
+        poster: moviePoster,
+        description: description,
+        genre_id: genreID
+      }
+    });
     goHome();
   }
 
@@ -88,9 +93,10 @@ export default function AddMovie() {
       <br /><br />
       <FormControl>
         <div className="genre-select-div">
-          <InputLabel id='genre-select' style={{color:'black'}} >Set Genre</InputLabel>
+          <InputLabel id='genre-select' style={{ color: 'black' }} >Set Genre</InputLabel>
           <Select
             fullWidth
+            required
             value={genreID}
             id='genre-select-id'
             label="Genre"
