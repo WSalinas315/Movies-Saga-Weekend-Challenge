@@ -28,8 +28,9 @@ function MovieList() {
     }, [url]);
 
     // function to update the detailURL in the redux store
-    const detailedPage = (title) => {
+    const detailedPage = (title, movie) => {
         dispatch({type: 'NEW_DETAIL', payload: title});
+        dispatch({type: 'SELECT_MOVIE', payload: movie});
     }
 
     // function to update to a detail/movie.title route
@@ -43,8 +44,8 @@ function MovieList() {
                 {movies.map(movie => {
                     return (
                         <div key={movie.id} >
-                            <h3 onClick={() => detailedPage(movie.title)}>{movie.title}</h3>
-                            <img src={movie.poster} alt={movie.title} onClick={() => detailedPage(movie.title)} />
+                            <h3>{movie.title}</h3>
+                            <img src={movie.poster} alt={movie.title} onClick={() => detailedPage(movie.title, movie)} />
                         </div>
                     );
                 })}
