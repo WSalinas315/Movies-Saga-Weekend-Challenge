@@ -18,6 +18,7 @@ function* rootSaga() {
     yield takeEvery('NEW_DETAIL', setDetailURL);
     yield takeEvery('FETCH_ID_GENRES', fetchIDGenres);
     yield takeEvery('FETCH_ALL_GENRES', fetchAllGenres);
+    yield takeEvery('ADD_MOVIE', postNewMovie);
 }
 
 // Sets detailURL with a selected movie title from the MovieList component
@@ -27,6 +28,16 @@ function* setDetailURL(action) {
         yield put({ type: 'SET_DETAIL', payload: action.payload });
     } catch (error){
         console.log('Error setting detailURL:', error);
+    }
+}
+
+// POST a new movie to the database
+function* postNewMovie(action){
+    try{
+        yield axios.post('/api/movie', action.payload);
+        yield put({type: 'FETCH_MOVIES'});
+    } catch (error){
+        console.log('Error posting new movie to database:', error);
     }
 }
 

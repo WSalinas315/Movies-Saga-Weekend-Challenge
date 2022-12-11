@@ -39,11 +39,21 @@ export default function AddMovie() {
 
   //
   const submitMovie = (event) => {
-
+    console.log('OBJECT to send for ADD_MOVIE:', movieTitle, moviePoster, description, genreID);
+    event.preventDefault();
+    dispatch({type: 'ADD_MOVIE', 
+              payload: {
+                title: movieTitle,
+                poster: moviePoster,
+                description: description,
+                genre_id: genreID
+    }});
+    // dispatch({ type: 'FETCH_MOVIES' });
+    goHome();
   }
-  // return 
+
+  // return genres as MenuItems
   const genreList = allGenres.map(genre => {
-    console.log('ALL GENRES FROM ADDMOVIE: ', allGenres);
     return (
       <MenuItem key={genre.id} value={genre.id}>{genre.name}</MenuItem>
     )

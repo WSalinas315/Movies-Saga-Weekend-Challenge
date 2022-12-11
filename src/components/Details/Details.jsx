@@ -24,9 +24,9 @@ export default function Details() {
   }
 
   // mapping over the genres for a particular movie and returning the genre name
-  const genreList = genres.data.map(genre => {
+  const genreList = genres.data.map((genre, i) => {
     return (
-      <h4 key={genre.id}>{genre.name}</h4>
+      <h4 key={i}>{genre.name}</h4>
     )
   })
 
