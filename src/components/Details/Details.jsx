@@ -2,6 +2,7 @@ import { useSelector } from 'react-redux';
 import { useHistory } from "react-router-dom";
 import { Button } from "@material-ui/core";
 import { useDispatch } from "react-redux";
+import './Details.css';
 
 export default function Details() {
 
@@ -17,8 +18,8 @@ export default function Details() {
   const dispatch = useDispatch();
 
   // function to return to user to the home page
-  const goHome = () =>{
-    dispatch({type: 'SET_DETAIL_HOME'});
+  const goHome = () => {
+    dispatch({ type: 'SET_DETAIL_HOME' });
     history.push('/');
   }
 
@@ -30,13 +31,23 @@ export default function Details() {
   })
 
   return (
-    <div className='movie-details'>
-      <Button variant='contained' onClick={() => goHome()}>Back To List</Button>
-      <img src={movie.poster} />
-      <h1>{movie.title}</h1>
-      <h3>Genres:</h3>
-      {genreList}
-      <h3>{movie.description}</h3>
+    <div className='details-container'>
+      <div className='movie-details'>
+        <div className='back-btn'>
+          <Button variant='contained' onClick={() => goHome()}>Back To List</Button>
+        </div>
+        <div className='imgage-container'>
+          <img src={movie.poster} />
+        </div>
+        <div className='basic-info'>
+          <h1>{movie.title}</h1>
+          <h3>Genres:</h3>
+          {genreList}
+        </div>
+      </div>
+      <div className='description'>
+        <h3>{movie.description}</h3>
+      </div>
     </div>
   )
 }

@@ -1,0 +1,21 @@
+.details-container{
+  display: flex;
+  flex-direction: column;
+  color: silver;
+}
+
+.movie-details{
+  display:flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 60px;
+}
+
+.back-btn{
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.description{
+  margin: 0% 23%;
+}
