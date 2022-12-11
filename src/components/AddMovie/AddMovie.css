@@ -2,3 +2,11 @@
   display: flex;
   justify-content: space-evenly;
 }
+
+.input-fields{
+  display: flex;
+}
+
+.genre-select-div{
+  width: 200px;
+}

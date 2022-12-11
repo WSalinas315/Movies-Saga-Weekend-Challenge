@@ -17,6 +17,7 @@ function* rootSaga() {
     yield takeEvery('FETCH_MOVIES', fetchAllMovies);
     yield takeEvery('NEW_DETAIL', setDetailURL);
     yield takeEvery('FETCH_ID_GENRES', fetchIDGenres);
+    yield takeEvery('FETCH_ALL_GENRES', fetchAllGenres);
 }
 
 // Sets detailURL with a selected movie title from the MovieList component
@@ -37,6 +38,16 @@ function* fetchAllMovies() {
         yield put({ type: 'SET_MOVIES', payload: movies.data });
     } catch (error){
         console.log('get all error:', error);
+    }
+}
+
+// Get all genres from database
+function* fetchAllGenres(){
+    try{
+        const genres = yield axios.get('/api/genre');
+        yield put({type: 'SET_ALL_GENRES', payload: genres.data});
+    }catch (error){
+        console.log('get all genres error:', error);
     }
 }
 
@@ -87,6 +98,16 @@ const genres = (state = {data:[]}, action) => {
     }
 }
 
+// Used to store all movie genres
+const allGenres = (state = [], action) => {
+    switch (action.type) {
+        case 'SET_ALL_GENRES':
+            return action.payload;
+        default:
+            return state;
+    }
+}
+
 // Used to store the selected movie object
 const selectedMovie = (state = {}, action) => {
     switch (action.type) {
@@ -99,7 +120,7 @@ const selectedMovie = (state = {}, action) => {
 
 // Create one store that all components can use
 const storeInstance = createStore(
-    combineReducers({ movies, genres, detailURL, selectedMovie }),
+    combineReducers({ movies, genres, detailURL, selectedMovie, allGenres }),
     // Add sagaMiddleware to our store
     applyMiddleware(sagaMiddleware, logger),
 );
@@ -108,10 +129,10 @@ const storeInstance = createStore(
 sagaMiddleware.run(rootSaga);
 
 ReactDOM.render(
-    <React.StrictMode>
+    // <React.StrictMode>
         <Provider store={storeInstance}>
             <App />
-        </Provider>
-    </React.StrictMode>,
+        </Provider>,
+    //  </React.StrictMode>,
     document.getElementById('root')
 );

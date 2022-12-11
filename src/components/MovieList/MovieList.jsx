@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import MovieItem from '../MovieItem/MovieItem';
 import { Button } from '@material-ui/core';
 import './MovieList.css';
 
@@ -22,6 +21,7 @@ function MovieList() {
     // fetches the movie list
     useEffect(() => {
         dispatch({ type: 'FETCH_MOVIES' });
+        dispatch({ type: 'FETCH_ALL_GENRES' });
     }, []);
 
     // calls histPush when url is updated
