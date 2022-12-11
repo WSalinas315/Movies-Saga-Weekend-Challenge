@@ -2,14 +2,19 @@ import React from "react";
 import './Header.css';
 import { useHistory } from "react-router-dom";
 import { Button } from "@material-ui/core";
+import { useDispatch } from "react-redux";
 
 export default function Header({headerText}){
 
   // initialize history
   const history = useHistory();
 
+  // initialize dispatch
+  const dispatch = useDispatch();
+
   // function to return to user to the home page
   const goHome = () =>{
+    dispatch({type: 'SET_DETAIL_HOME'});
     history.push('/');
   }
 

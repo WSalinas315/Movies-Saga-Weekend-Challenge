@@ -13,14 +13,22 @@ import axios from 'axios';
 
 // Create the rootSaga generator function
 function* rootSaga() {
+    console.log(`ROOT SAGA being called`);
     yield takeEvery('FETCH_MOVIES', fetchAllMovies);
+    yield takeEvery('NEW_DETAIL', setDetailURL);
 }
 
-// get all movies from the DB
+// Sets detailURL with a selected movie title from the MovieList component
+function* setDetailURL(action){
+    console.log('In SAGA setDetailURL with:', action.payload);
+    yield put({type: 'SET_DETAIL', payload: action.payload});
+}
+
+// Get all movies from the DB
 function* fetchAllMovies() {
     try {
         const movies = yield axios.get('/api/movie');
-        console.log('get all:', movies.data);
+        // console.log('get all:', movies.data);
         yield put({ type: 'SET_MOVIES', payload: movies.data });
     } catch {
         console.log('get all error');
@@ -29,6 +37,20 @@ function* fetchAllMovies() {
 
 // Create sagaMiddleware
 const sagaMiddleware = createSagaMiddleware();
+
+// Used to store movie details URL
+const detailURL = (state='', action) => {
+    // console.log('In store detailURL with:', action.payload);
+    switch (action.type){
+        case 'SET_DETAIL':
+            // console.log('In store detailURL, SET_DETAIL case with:', action.payload);
+            return `detail/${action.payload}`;
+        case 'SET_DETAIL_HOME':
+            return '';
+        default:
+            return state;
+    }
+}
 
 // Used to store movies returned from the server
 const movies = (state = [], action) => {
@@ -52,7 +74,7 @@ const genres = (state = [], action) => {
 
 // Create one store that all components can use
 const storeInstance = createStore(
-    combineReducers({movies,genres,}),
+    combineReducers({movies,genres,detailURL}),
     // Add sagaMiddleware to our store
     applyMiddleware(sagaMiddleware, logger),
 );

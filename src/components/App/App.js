@@ -5,6 +5,7 @@ import Header from '../Header/Header';
 import Details from '../Details/Details';
 
 function App() {
+
   return (
     <div className="App">
       <h1>The Movies Saga!</h1>
@@ -15,11 +16,10 @@ function App() {
           <MovieList />
         </Route>
         {/* Details page */}
-        <Route path="/details">
-          <Header headerText='' />
+        <Route path="/detail/:id" exact>
+          <Header />
           <Details />
         </Route>
-
         {/* Add Movie page */}
       </Router>
     </div>
