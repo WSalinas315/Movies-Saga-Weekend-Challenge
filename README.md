@@ -13,6 +13,7 @@ A Movie Details page.
 ![Alt text](public/images/Details.png)
 
 The URL for each details page includes that movie's title.
+
 ![Alt text](public/images/URLbar.png)
 
 The 'Add Movie' page.
