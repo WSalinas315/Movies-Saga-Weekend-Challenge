@@ -31,6 +31,7 @@ function MovieList() {
     const detailedPage = (title, movie) => {
         dispatch({type: 'NEW_DETAIL', payload: title});
         dispatch({type: 'SELECT_MOVIE', payload: movie});
+        dispatch({type: 'FETCH_ID_GENRES', payload: movie.id});
     }
 
     // function to update to a detail/movie.title route
