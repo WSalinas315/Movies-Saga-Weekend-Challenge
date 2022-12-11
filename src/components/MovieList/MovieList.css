@@ -1,7 +1,8 @@
 .movies {
     display : flex;
     flex-wrap: wrap;
-    gap: 15px;
+    gap: 20px;
+    justify-content: center;
 }
 
 main{
@@ -31,4 +32,8 @@ img{
 .movie-title{
     position:relative;
     bottom: 10px;
+}
+
+.add-btn{
+    margin-bottom: 15px;
 }

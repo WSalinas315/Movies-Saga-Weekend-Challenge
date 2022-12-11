@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import MovieItem from '../MovieItem/MovieItem';
+import { Button } from '@material-ui/core';
 import './MovieList.css';
 
 function MovieList() {
@@ -40,9 +41,17 @@ function MovieList() {
         history.push(`/${url}`);
     }
 
+    // function to move to the add movie route
+    const addMovie = () =>{
+        history.push('/add');
+    }
+
     return (
         <main>
             <h1>Movie List</h1>
+            <div className="add-btn">
+                <Button variant='contained' onClick={() => addMovie()}>Add Movie</Button>
+            </div>
             <section className="movies">
                 {movies.map(movie => {
                     // <MovieItem movie={movie} />

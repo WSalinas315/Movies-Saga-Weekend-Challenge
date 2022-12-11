@@ -3,6 +3,7 @@ import './App.css';
 import MovieList from '../MovieList/MovieList';
 import Header from '../Header/Header';
 import Details from '../Details/Details';
+import AddMovie from '../AddMovie/AddMovie';
 
 function App() {
 
@@ -10,16 +11,20 @@ function App() {
     <div className="App">
       <Router>
         {/* Home page */}
-        <Route path="/" exact>
+        <Route exact path="/">
           <Header />
           <MovieList />
         </Route>
         {/* Details page */}
-        <Route path="/detail/:id" exact>
+        <Route exact path="/detail/:id">
           <Header />
           <Details />
         </Route>
         {/* Add Movie page */}
+        <Route exact path="/add">
+          <Header />
+          <AddMovie />
+        </Route>
       </Router>
     </div>
   );
