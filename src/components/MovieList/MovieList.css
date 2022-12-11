@@ -12,9 +12,23 @@ main{
 
 
 .movie-card{
+    display: flex;
+    flex-direction: column;
     background-color: silver;
-    padding: 20px;
+    padding: 10px 20px;
     border-radius: 12px;
     color: black;
-    width: 225px;
+    width: 185px;
+}
+
+img{
+    object-fit: cover;
+    width: 185px;
+    max-height: 274px;
+    min-height: 274px;
+}
+
+.movie-title{
+    position:relative;
+    bottom: 10px;
 }

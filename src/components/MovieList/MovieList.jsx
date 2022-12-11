@@ -47,8 +47,8 @@ function MovieList() {
                 {movies.map(movie => {
                     // <MovieItem movie={movie} />
                     return (
-                        <div key={movie.id} className="movie-card">
-                            <h3>{movie.title}</h3>
+                        <div key={movie.id} className='movie-card'>
+                            <h3 className='movie-title'>{movie.title}</h3>
                             <img src={movie.poster} alt={movie.title} onClick={() => detailedPage(movie.title, movie)} />
                         </div>
                     );
