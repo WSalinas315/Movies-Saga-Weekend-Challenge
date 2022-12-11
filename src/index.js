@@ -16,22 +16,37 @@ function* rootSaga() {
     console.log(`ROOT SAGA being called`);
     yield takeEvery('FETCH_MOVIES', fetchAllMovies);
     yield takeEvery('NEW_DETAIL', setDetailURL);
+    yield takeEvery('FETCH_ID_GENRES', fetchIDGenres);
 }
 
 // Sets detailURL with a selected movie title from the MovieList component
-function* setDetailURL(action){
-    console.log('In SAGA setDetailURL with:', action.payload);
-    yield put({type: 'SET_DETAIL', payload: action.payload});
+function* setDetailURL(action) {
+    try {
+        console.log('In SAGA setDetailURL with:', action.payload);
+        yield put({ type: 'SET_DETAIL', payload: action.payload });
+    } catch (error){
+        console.log('Error setting detailURL:', error);
+    }
 }
 
-// Get all movies from the DB
+// Get all movies from the database
 function* fetchAllMovies() {
     try {
         const movies = yield axios.get('/api/movie');
         // console.log('get all:', movies.data);
         yield put({ type: 'SET_MOVIES', payload: movies.data });
-    } catch {
-        console.log('get all error');
+    } catch (error){
+        console.log('get all error:', error);
+    }
+}
+
+// Get all genres by ID from the database
+function* fetchIDGenres(action) {
+    try {
+        const genres = yield axios.get('/api/genre/'+action.payload);
+        yield put({type: 'SET_GENRES', payload: genres});
+    } catch (error){
+        console.log('Error fetching genres by ID:', error);
     }
 }
 
@@ -39,9 +54,9 @@ function* fetchAllMovies() {
 const sagaMiddleware = createSagaMiddleware();
 
 // Used to store movie details URL
-const detailURL = (state='', action) => {
+const detailURL = (state = '', action) => {
     // console.log('In store detailURL with:', action.payload);
-    switch (action.type){
+    switch (action.type) {
         case 'SET_DETAIL':
             // console.log('In store detailURL, SET_DETAIL case with:', action.payload);
             return `detail/${action.payload}`;
@@ -84,7 +99,7 @@ const selectedMovie = (state = {}, action) => {
 
 // Create one store that all components can use
 const storeInstance = createStore(
-    combineReducers({movies,genres,detailURL,selectedMovie}),
+    combineReducers({ movies, genres, detailURL, selectedMovie }),
     // Add sagaMiddleware to our store
     applyMiddleware(sagaMiddleware, logger),
 );
