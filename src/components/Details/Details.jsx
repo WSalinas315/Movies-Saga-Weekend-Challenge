@@ -26,7 +26,7 @@ export default function Details() {
   // mapping over the genres for a particular movie and returning the genre name
   const genreList = genres.data.map(genre => {
     return (
-      <h3 key={genre.id}>{genre.name}</h3>
+      <h4 key={genre.id}>{genre.name}</h4>
     )
   })
 
@@ -41,7 +41,7 @@ export default function Details() {
         </div>
         <div className='basic-info'>
           <h1>{movie.title}</h1>
-          <h3>Genres:</h3>
+          <h4>Genres:</h4>
           {genreList}
         </div>
       </div>
